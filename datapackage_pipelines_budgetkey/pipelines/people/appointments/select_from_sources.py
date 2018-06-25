@@ -1,12 +1,11 @@
 from datapackage_pipelines.wrapper import process
 
-
 def process_row(row, *_):
     sources = row['sources']
     if sources:
-        sources = sorted(sources, key=lambda x:x['date'])
-        row['when'] = sources[0]['date']
-        row['title'] = sources[0]['details']
+        sources = sorted(sources, key=lambda x:x.get('date'))
+        row['when'] = sources[0].get('date')
+        row['title'] = sources[0].get('details')
     row['event'] = 'appointment'
     return row
 
